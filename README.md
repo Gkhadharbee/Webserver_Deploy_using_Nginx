@@ -11,8 +11,6 @@ Before proceeding with the deployment, ensure you have the following:
 
 * Root or sudo access
 
-* A registered domain name (optional but recommended)
-
 * An application or website to serve
 
 ## Installation Steps
