@@ -27,8 +27,10 @@ sudo yum update -y                       # For CentOS/RHEL
 ### <p align ="">Step 2: Install Nginx</p>
 
 ```bash
-sudo apt install nginx -y    # For Ubuntu/Debian
-sudo yum install nginx -y    # For CentOS/RHEL
+sudo apt install nginx -y                 # For Ubuntu/Debian
+sudo amazon-linux-extras enable nginx1    # For CentOS/RHEL
+sudo yum install -y nginx
+
 ```
 
 ### <p align ="">Step 3: Start and Enable Nginx</p>
@@ -52,7 +54,7 @@ sudo firewall-cmd --reload   # For CentOS/RHEL
 Create a new configuration file:
 
 ```bash
-sudo vim /etc/nginx/sites-available/example.com
+sudo vim /etc/nginx/conf.d/default.conf
 ```
 
 Add the following configuration:
@@ -60,10 +62,10 @@ Add the following configuration:
 ```bash
 server {
     listen 80;
-    server_name example.com www.example.com;
+    server_name 54.225.58.185;  # your ip-address
 
-    root /var/www/example.com;
-    index index.html index.htm;
+    root /usr/share/nginx/html;
+    index index.html;
 
     location / {
         try_files $uri $uri/ =404;
@@ -71,15 +73,13 @@ server {
 }
 ```
 
-Enable the site and restart Nginx:
+Restart Nginx:
 
 ```bash
-sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/
-sudo nginx -t
 sudo systemctl restart nginx
 ```
 
-### <p align ="">Step 5: Secure Nginx with SSL</p>
+### <p align ="">Step 6: Secure Nginx with SSL</p>
 
 To enable HTTPS, install and configure Let's Encrypt SSL:
 
@@ -94,9 +94,22 @@ Renew SSL automatically:
 sudo certbot renew --dry-run
 ```
 
+### <p align="">Step 7: Deploy Your Website</p>
+Remove the default Amazon Linux page:
+
+```bash
+sudo rm -f /usr/share/nginx/html/index.html
+```
+
+Create a new index page:
+
+```bash
+echo "<h1>Welcome to My Nginx Web Server</h1><p>This is simple project about the Web Server Deployment using Nginx"</p> | sudo tee /usr/share/nginx/html/index.html
+```
+
 ## Testing Deployment
 
-1. Open a web browser and visit http://example.com
+1. Open http://your-ec2-public-ip in your browser
 
 2. Verify Nginx is serving the expected content
 
@@ -116,8 +129,6 @@ sudo tail -f /var/log/nginx/error.log
 
 - Verify firewall settings
 
-- Ensure the domain DNS is correctly configured
-
 ## Conclusion
 
-By following this guide, you have successfully deployed a web server using Nginx. You can further optimize the setup by adding caching, load balancing, or integrating it with Docker and CI/CD pipelines.
+Finally, you have successfully deployed a web server using Nginx. 
