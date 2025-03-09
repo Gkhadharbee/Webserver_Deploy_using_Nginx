@@ -110,7 +110,7 @@ server {
 }
 ```
 
-Restart Nginx:
+- Restart Nginx:
 
 ```bash
 sudo systemctl restart nginx
