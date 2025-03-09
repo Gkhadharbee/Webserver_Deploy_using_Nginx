@@ -71,25 +71,42 @@ server {
 }
 ```
 
+### <p align ="">Step 6: Secure Nginx with SSL</p>
+To enable HTTPS, install and configure Let's Encrypt SSL: 
+
+sudo apt install certbot python3-certbot-nginx -y            # If you have a domain
+sudo certbot --nginx -d example.com -d www.example.com
+
+Renew SSL automatically:
+If don't have a domain, you can generate a self-signed SSL certificate instead:
+
+```bash
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt
+```
+
+Then, configure Nginx to use this certificate:
+
+```bash
+server {
+    listen 443 ssl;
+    server_name 54.225.58.185;
+    
+    ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
+    ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
+
+    root /var/www/html;
+    index index.html index.htm;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
+```
+
 Restart Nginx:
 
 ```bash
 sudo systemctl restart nginx
-```
-
-### <p align ="">Step 6: Secure Nginx with SSL</p>
-
-To enable HTTPS, install and configure Let's Encrypt SSL:
-
-```bash
-sudo apt install certbot python3-certbot-nginx -y
-sudo certbot --nginx -d example.com -d www.example.com
-```
-
-Renew SSL automatically:
-
-```bash
-sudo certbot renew --dry-run
 ```
 
 ### <p align="">Step 7: Deploy Your Website</p>
