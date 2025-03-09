@@ -60,7 +60,7 @@ Add the following configuration:
 ```bash
 server {
     listen 80;
-    server_name 54.225.58.185;  # your ip-address
+    server_name 54.225.58.185;  # your IP-address
 
     root /usr/share/nginx/html;
     index index.html;
@@ -96,7 +96,7 @@ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/privat
 ```bash
 server {
     listen 443 ssl;
-    server_name 54.225.58.185; 
+    server_name 54.225.58.185;     # your IP address
     
     ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
     ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
