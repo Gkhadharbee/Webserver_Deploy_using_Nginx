@@ -52,7 +52,7 @@ sudo firewall-cmd --reload   # For CentOS/RHEL
 Create a new configuration file:
 
 ```bash
-sudo nano /etc/nginx/sites-available/example.com
+sudo vim /etc/nginx/sites-available/example.com
 ```
 
 Add the following configuration:
@@ -79,7 +79,7 @@ sudo nginx -t
 sudo systemctl restart nginx
 ```
 
-### <p align=">Step 6: Secure Nginx with SSL </p>
+### <p align ="">Step 5: Secure Nginx with SSL</p>
 
 To enable HTTPS, install and configure Let's Encrypt SSL:
 
@@ -90,9 +90,9 @@ sudo certbot --nginx -d example.com -d www.example.com
 
 Renew SSL automatically:
 
-``bash
+```bash
 sudo certbot renew --dry-run
-``
+```
 
 ## Testing Deployment
 
