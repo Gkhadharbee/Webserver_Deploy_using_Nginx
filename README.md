@@ -133,7 +133,9 @@ echo "<h1>Welcome to My Nginx Web Server</h1><p>This is simple project about the
 
 1. Open http://your-ec2-public-ip in your browser
 
+
 ![Screenshot 2025-03-08 163211](https://github.com/user-attachments/assets/2712d5c9-1065-472a-b76c-9ed110300e57)
+
 
 2. Verify Nginx is serving the expected content
 
