@@ -79,6 +79,21 @@ sudo nginx -t
 sudo systemctl restart nginx
 ```
 
+### <p align=">Step 6: Secure Nginx with SSL </p>
+
+To enable HTTPS, install and configure Let's Encrypt SSL:
+
+```bash
+sudo apt install certbot python3-certbot-nginx -y
+sudo certbot --nginx -d example.com -d www.example.com
+```
+
+Renew SSL automatically:
+
+``bash
+sudo certbot renew --dry-run
+``
+
 ## Testing Deployment
 
 1. Open a web browser and visit http://example.com
